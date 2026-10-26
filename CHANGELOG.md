@@ -10,6 +10,8 @@
 - 新增落地页 `docs/index.html`（可控 `<title>`、`meta description`、JSON-LD `SoftwareApplication` + `FAQPage`(10 问) + `HowTo`、五方案对比表、用户原话引句），配套 `docs/llms.txt`。
 - 新增 `README.zh-CN.md`：中文独立主诉求（不混入英文主 README 首屏），按需求意图组织 H2 与 FAQ。
 - 新增 `.seo/ledger.yaml`：唯一词表、期望元数据、20 个 topics、8 类需求意图（28 条 query，标注 ac/title/authored 来源）、反 churn 护栏。
+- **GEO 改造（依据 `geo-playbook.md`）**：FAQ 由折叠改**可见直出**（10 条 h3+p）；移除已废弃的 `FAQPage`/`HowTo` JSON-LD（Google 2023-08 收缩、2026-06 删文档；对照实验对 AI 引用为负），保留 `SoftwareApplication`+`WebSite`；事实卡每个数字就近给"出处"链接；补 `dateModified`/日期/版本行、skip link、`focus-visible`、`prefers-reduced-motion`、打印样式、图片固有尺寸；正文包进 `<article>`。`geo` 审计 **83 → 100/100**。
+- `docs/llms.txt` 定位下调为**可选**（137,210 域实测 97% 整月 0 请求），不再作为交付指标。
 - **需求侧 T0 基线**：DeepSeek 官方 Search 对 28 条需求句命中 **0/28**，DCR=0；品牌词 `履痕` 也落到词典站 → 证实"检索层原样转发查询、不做语义改写"，内容必须字面含用户原话。静态 `coverage`：8/8 意图已有表层覆盖 ≥40%。
 - 命名决策：`Lifeline` 与 `CamDavidsonPilon/lifelines`（2618★）撞名（`in:name` 3838 条），决定改为 `lvhen-resume`（`in:name` 撞名 0）。
 - 注：改名/元数据/Pages 属线上写操作，尚未执行；改名时须同步 5 处仓库引用（update_service / settings_page / README / ARCHITECTURE / COMMERCIAL）与落地页 canonical。

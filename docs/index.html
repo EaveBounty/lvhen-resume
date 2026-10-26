@@ -51,6 +51,7 @@
   a:focus-visible, summary:focus-visible, .cta:focus-visible { outline:3px solid var(--accent); outline-offset:3px; border-radius:4px }
   .skip { position:absolute; left:-9999px; top:0; background:var(--card); padding:10px 14px; border:1px solid var(--line); border-radius:8px; z-index:9 }
   .skip:focus { left:12px; top:12px }
+  @media print { .skip, .cta { display:none } body { background:#fff; color:#000 } }
   @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; scroll-behavior:auto !important } }
 </style>
 
@@ -59,7 +60,10 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "履痕 (Lvhen)",
-  "alternateName": ["Lvhen", "履痕"],
+  "alternateName": [
+    "Lvhen",
+    "履痕"
+  ],
   "applicationCategory": "BusinessApplication",
   "applicationSubCategory": "Resume builder / Personal information manager",
   "operatingSystem": "Android, Windows, Linux, Web",
@@ -69,10 +73,21 @@
   "downloadUrl": "https://github.com/EaveBounty/lvhen-resume/releases",
   "license": "https://polyformproject.org/licenses/noncommercial/1.0.0/",
   "isAccessibleForFree": true,
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CNY"
+  },
   "programmingLanguage": "Dart",
-  "author": { "@type": "Organization", "name": "长沙市果垂素宇工程设计有限公司", "alternateName": "EaveBounty" },
-  "inLanguage": ["zh-CN", "en"],
+  "author": {
+    "@type": "Organization",
+    "name": "长沙市果垂素宇工程设计有限公司",
+    "alternateName": "EaveBounty"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en"
+  ],
   "softwareVersion": "0.8.0",
   "dateModified": "2026-10-26",
   "keywords": "简历工具, 简历生成, 个人资料管理, 本地优先, 不上传, 离线, ATS 简历, markdown, JSON resume, Flutter"
@@ -83,47 +98,24 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "履痕 Lvhen",
-  "alternateName": ["履痕", "Lvhen"],
+  "alternateName": [
+    "履痕",
+    "Lvhen"
+  ],
   "url": "https://eavebounty.github.io/lvhen-resume/",
   "inLanguage": "zh-CN",
-  "publisher": { "@type": "Organization", "name": "长沙市果垂素宇工程设计有限公司", "alternateName": "EaveBounty" }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type":"Question","name":"怎么把以前做过的事整理成一份简历？","acceptedAnswer":{"@type":"Answer","text":"把它当成一次录入、长期累积：每条经历（教育、工作、项目、论文、奖项）在履痕里存成一条记录，软件按时间与分类自动编译成完整简历。以后新增一条，简历立刻重编译，不需要重新回忆和排版。"}},
-    {"@type":"Question","name":"简历数据能存在自己电脑的文件夹里吗？","acceptedAnswer":{"@type":"Answer","text":"能，而且这是唯一存储方式。数据是同步根目录里的 JSON/YAML 与附件，一条记录一个 <uuid>.json；SQLite 只是可 100% 重建的索引，删掉不丢数据。软件不做同步，需要多设备时用 Syncthing、WebDAV 或 Git。"}},
-    {"@type":"Question","name":"有没有不上传云端、不注册账号的简历软件？","acceptedAnswer":{"@type":"Answer","text":"有。履痕不上传、不建账号、不私自创建目录；除 Web 演示版外可完全离线使用。AI 录入与评估可接本地 Ollama，或用你自己的 API Key。"}},
-    {"@type":"Question","name":"每次投不同岗位都要重新改一遍简历，怎么办？","acceptedAnswer":{"@type":"Answer","text":"用「问卷 + 岗位调研」生成裁剪策略：先选目标岗位与职级，系统给出保留/压缩/删除的取舍与理由，再按 10 套模板之一渲染。原素材不动，改动只发生在这一份导出里，可随时回到库内重渲染。"}},
-    {"@type":"Question","name":"简历怎么针对具体岗位（JD）改？","acceptedAnswer":{"@type":"Answer","text":"把岗位描述粘进导出问卷，系统会按岗位画像（内置 60 类，细分行业与职级）比对硬性要求，指出缺漏项，并按边际效益排序给出补齐建议，然后再生成定向版本。"}},
-    {"@type":"Question","name":"能导出 DOCX 给 ATS 用吗？","acceptedAnswer":{"@type":"Answer","text":"能。导出支持 DOCX（单列 ATS 友好）、PDF（桌面端 Typst 渲染，全平台 DartPdf 兜底）与 Markdown（可版本对比）。同一份数据可以同时导出多种格式。"}},
-    {"@type":"Question","name":"导出的 PDF 文字不能选中 / 排版乱怎么办？","acceptedAnswer":{"@type":"Answer","text":"这类问题多来自把文字渲染成图片或行高计算不一致。履痕的 PDF 是文本层（可选中、可被 ATS 解析），并针对固定页数做了裁剪闭环：先渲染计量页数，再按取舍权重确定性裁剪后重渲染。"}},
-    {"@type":"Question","name":"和 Notion、Word 模板、在线简历工具比，区别是什么？","acceptedAnswer":{"@type":"Answer","text":"数据是你的纯文本文件而不是平台里的记录：可 diff、可 Git 合并、可被任意编辑器修改；在线工具把数据锁在服务端，导出通常只有 PDF；Word 模板是二进制，改一处容易崩版式，也没有版本历史。"}},
-    {"@type":"Question","name":"学术 CV 和求职简历能共用一套数据吗？","acceptedAnswer":{"@type":"Answer","text":"能。论文、项目、教学经历都可以作为记录存在同一份库里，按不同模板与筛选条件分别导出：学术 CV（academic-cv 模板，保留完整论文列表）与求职简历（ATS 单列，压缩到一页）共用同一真相源。"}},
-    {"@type":"Question","name":"履痕是开源软件吗？","acceptedAnswer":{"@type":"Answer","text":"源码公开，但许可为 PolyForm Noncommercial License 1.0.0（非 OSI 认可的开源许可）：允许非商业使用与修改，商业用途需另行授权。"}}
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "如何把散落的经历整理成一份简历",
-  "totalTime": "PT10M",
-  "step": [
-    {"@type":"HowToStep","position":1,"name":"选一个自己的文件夹","text":"首次启动时亲自选择一个空文件夹作为同步根，软件不会替你创建。"},
-    {"@type":"HowToStep","position":2,"name":"录入经历","text":"粘贴文字或拍照，AI 抽取为结构化记录（严格 JSON，人工确认）；也可以直接手写 JSON 文件。"},
-    {"@type":"HowToStep","position":3,"name":"选岗位并定向导出","text":"选择目标岗位 → 回答裁剪问卷 → 预览模板 → 导出 PDF / DOCX(ATS) / Markdown。"}
-  ]
+  "publisher": {
+    "@type": "Organization",
+    "name": "长沙市果垂素宇工程设计有限公司",
+    "alternateName": "EaveBounty"
+  }
 }
 </script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
 <main id="main">
+<article>
 
 <header>
   <img src="./assets/icon.png" alt="履痕 Lvhen 应用图标" width="64" height="64">
@@ -145,10 +137,10 @@
 </p>
 
 <div class="grid">
-  <div class="card"><b>10 套</b><span>模板：ATS 单列 / 学术 CV / 教师 / 创意 / 商务 …，按目标岗位推荐</span></div>
-  <div class="card"><b>60 类</b><span>岗位画像（细分行业 + 职级），给出按边际效益排序的补齐建议</span></div>
-  <div class="card"><b>4 平台</b><span>Android、Windows、Linux、Web，共用同一份数据文件夹</span></div>
-  <div class="card"><b>0 云端</b><span>无账号、无上传、无私有协议；删掉索引库也不丢数据</span></div>
+  <div class="card"><b>10 套</b><span>模板：ATS 单列 / 学术 CV / 教师 / 创意 / 商务 …，按目标岗位推荐 · <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md#简历生成与模板">出处</a></span></div>
+  <div class="card"><b>60 类</b><span>岗位画像（细分行业 + 职级），给出按边际效益排序的补齐建议 · <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md#简历评估">出处</a></span></div>
+  <div class="card"><b>4 平台</b><span>Android、Windows、Linux、Web，共用同一份数据文件夹 · <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md#构建与运行">出处</a></span></div>
+  <div class="card"><b>0 云端</b><span>无账号、无上传、无私有协议；删掉索引库也不丢数据 · <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md#数据挂载与同步理念">出处</a></span></div>
 </div>
 
 <h2>简历数据存在哪？会不会上传？</h2>
@@ -191,35 +183,35 @@
 
 <h2>常见问题（FAQ）</h2>
 
-<details><summary>怎么把以前做过的事整理成一份简历？</summary>
-<p>把它当成一次录入、长期累积：每条经历存成一条记录，软件按时间与分类自动编译成完整简历。以后新增一条，简历立刻重编译，不需要重新回忆和排版。</p></details>
+<h3>怎么把以前做过的事整理成一份简历？</h3>
+<p>把它当成一次录入、长期累积：每条经历存成一条记录，软件按时间与分类自动编译成完整简历。以后新增一条，简历立刻重编译，不需要重新回忆和排版。</p>
 
-<details><summary>简历数据能存在自己电脑的文件夹里吗？</summary>
-<p>能，而且这是唯一存储方式。数据是同步根目录里的 JSON/YAML 与附件；SQLite 只是可 100% 重建的索引，删掉不丢数据。</p></details>
+<h3>简历数据能存在自己电脑的文件夹里吗？</h3>
+<p>能，而且这是唯一存储方式。数据是同步根目录里的 JSON/YAML 与附件；SQLite 只是可 100% 重建的索引，删掉不丢数据。</p>
 
-<details><summary>有没有不上传云端、不注册账号的简历软件？</summary>
-<p>有。履痕不上传、不建账号、不私自创建目录；除 Web 演示版外可完全离线。AI 录入与评估可接本地 Ollama 或用你自己的 API Key。</p></details>
+<h3>有没有不上传云端、不注册账号的简历软件？</h3>
+<p>有。履痕不上传、不建账号、不私自创建目录；除 Web 演示版外可完全离线。AI 录入与评估可接本地 Ollama 或用你自己的 API Key。</p>
 
-<details><summary>每次投不同岗位都要重新改一遍简历，怎么办？</summary>
-<p>用「问卷 + 岗位调研」生成裁剪策略：保留/压缩/删除都给出理由，再按 10 套模板之一渲染。原素材不动，改动只在这份导出里。</p></details>
+<h3>每次投不同岗位都要重新改一遍简历，怎么办？</h3>
+<p>用「问卷 + 岗位调研」生成裁剪策略：保留/压缩/删除都给出理由，再按 10 套模板之一渲染。原素材不动，改动只在这份导出里。</p>
 
-<details><summary>简历怎么针对具体岗位（JD）改？</summary>
-<p>把 JD 粘进导出问卷，系统按 60 类岗位画像比对硬性要求，指出缺漏并按边际效益排序建议补齐顺序，再生成定向版本。</p></details>
+<h3>简历怎么针对具体岗位（JD）改？</h3>
+<p>把 JD 粘进导出问卷，系统按 60 类岗位画像比对硬性要求，指出缺漏并按边际效益排序建议补齐顺序，再生成定向版本。</p>
 
-<details><summary>能导出 DOCX 给 ATS 用吗？</summary>
-<p>能。DOCX 单列 ATS 友好；同时支持 PDF（Typst / DartPdf）与 Markdown（可版本对比）。同一份数据可导出多种格式。</p></details>
+<h3>能导出 DOCX 给 ATS 用吗？</h3>
+<p>能。DOCX 单列 ATS 友好；同时支持 PDF（Typst / DartPdf）与 Markdown（可版本对比）。同一份数据可导出多种格式。</p>
 
-<details><summary>导出的 PDF 文字不能选中 / 排版乱怎么办？</summary>
-<p>这类问题多来自把文字渲染成图片或行高不一致。履痕的 PDF 保留文本层（可选中、可被 ATS 解析），并有固定页数的裁剪闭环，先计量再裁剪后重渲染。</p></details>
+<h3>导出的 PDF 文字不能选中 / 排版乱怎么办？</h3>
+<p>这类问题多来自把文字渲染成图片或行高不一致。履痕的 PDF 保留文本层（可选中、可被 ATS 解析），并有固定页数的裁剪闭环，先计量再裁剪后重渲染。</p>
 
-<details><summary>和 Notion、Word 模板、在线简历工具比，区别是什么？</summary>
-<p>数据是你的纯文本文件而不是平台记录：可 diff、可 Git 合并、可被任意编辑器修改；在线工具把数据锁在服务端、导出通常只有 PDF；Word 模板是二进制，改一处容易崩版式。</p></details>
+<h3>和 Notion、Word 模板、在线简历工具比，区别是什么？</h3>
+<p>数据是你的纯文本文件而不是平台记录：可 diff、可 Git 合并、可被任意编辑器修改；在线工具把数据锁在服务端、导出通常只有 PDF；Word 模板是二进制，改一处容易崩版式。</p>
 
-<details><summary>学术 CV 和求职简历能共用一套数据吗？</summary>
-<p>能。论文、项目、教学经历存在同一份库里，按不同模板与筛选条件分别导出学术 CV 或一页 ATS 简历。</p></details>
+<h3>学术 CV 和求职简历能共用一套数据吗？</h3>
+<p>能。论文、项目、教学经历存在同一份库里，按不同模板与筛选条件分别导出学术 CV 或一页 ATS 简历。</p>
 
-<details><summary>履痕是开源软件吗？</summary>
-<p>源码公开，但许可是 <b>PolyForm Noncommercial License 1.0.0</b>（非 OSI 认可的开源许可）：允许非商业使用与修改，商业用途需另行授权。</p></details>
+<h3>履痕是开源软件吗？</h3>
+<p>源码公开，但许可是 <b>PolyForm Noncommercial License 1.0.0</b>（非 OSI 认可的开源许可）：允许非商业使用与修改，商业用途需另行授权。</p>
 
 <h2>快速开始</h2>
 <ol>
@@ -233,6 +225,7 @@
   <p>给机器读的摘要：<a href="./llms.txt">llms.txt</a> · 数据格式：<a href="./DATA_FORMAT.md">DATA_FORMAT.md</a> · 同步理念：<a href="./SYNC.md">SYNC.md</a></p>
 </footer>
 
+</article>
 </main>
 </body>
 </html>
