@@ -1,12 +1,15 @@
-# 履痕（Lifeline）
+# 履痕（Lvhen）— 本地优先的个人资料库与简历编译器
 
-<p align="center"><img src="docs/assets/icon.png" width="112" alt="履痕 图标"></p>
+<p align="center"><img src="docs/assets/icon.png" width="112" alt="履痕 Lvhen 应用图标"></p>
 
-> 跨平台（Android / Windows / Linux / Web）个人资料管理软件：把散落的个人经历沉淀为**可挂载、可 diff、可被任意工具同步的纯文本文件夹**，聚合成一份**不断自动编译的完整简历**，并支持 AI 自动录入、按岗位定向导出（多模板 Typst→PDF / DOCX / Markdown）与简历评估。
+> **Local-first career record and résumé compiler** — 跨平台（Android / Windows / Linux / Web）个人资料管理软件：把散落的个人经历沉淀为**可挂载、可 diff、可被任意工具同步的纯文本文件夹**，聚合成一份**不断自动编译的完整简历**，并支持 AI 自动录入、按岗位定向导出（多模板 Typst→PDF / DOCX / Markdown）与简历评估。
+>
+> 数据是你自己文件夹里的 `JSON`/`YAML`，软件不做同步、不拥有数据；`index.sqlite` 只是可 100% 重建的索引。
+> 落地页：<https://eavebounty.github.io/lvhen/> ｜ 机器可读摘要：<https://eavebounty.github.io/lvhen/llms.txt>
 
-- **显示名**：履痕　｜　**英文标识 / 仓库**：`Lifeline`　｜　**包名**：`com.eavebounty.lifeline`
+- **显示名**：履痕　｜　**英文标识 / 仓库**：`lvhen-resume`　｜　**包名**：`com.eavebounty.lifeline`
 
-仓库：`EaveBounty/Lifeline` ｜ 许可：**PolyForm Noncommercial License 1.0.0**
+仓库：`EaveBounty/lvhen-resume` ｜ 许可：**PolyForm Noncommercial License 1.0.0**
 版权：**长沙市果垂素宇工程设计有限公司**
 
 <p>

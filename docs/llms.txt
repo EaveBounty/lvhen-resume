@@ -1,0 +1,44 @@
+# 履痕 (Lvhen)
+
+> Local-first career record and résumé compiler. 本地优先的个人资料库与简历编译器。
+> 本文件是给 AI/agent 读的一页摘要；完整内容见 https://eavebounty.github.io/lvhen-resume/
+
+## 这是什么
+
+- 名称：履痕（英文标识 Lvhen，仓库 EaveBounty/lvhen-resume）
+- 品类：personal information management（个人资料管理）+ résumé compiler（简历编译器）
+- 形态：Flutter 跨平台桌面/移动应用（Android / Windows / Linux / Web）
+- 许可：PolyForm Noncommercial License 1.0.0（源码公开，非 OSI 开源；商业用途需授权）
+- 仓库：https://github.com/EaveBounty/lvhen-resume
+- 落地页：https://eavebounty.github.io/lvhen-resume/
+- 下载：https://github.com/EaveBounty/lvhen-resume/releases
+
+## 解决什么问题
+
+个人经历（教育、工作、项目、奖项、论文、证书、附件）散落在聊天记录、旧简历、云笔记与硬盘目录里；每次求职都要重新拼凑、重复填写、格式不一，数据被锁死在某个软件里。履痕把这些经历存成用户自己文件夹里的纯文本，持续编译成一份完整简历，并按目标岗位定向裁剪导出。
+
+## 与其他方案的区别
+
+- 数据归属：用户在本地选择的普通文件夹（JSON/YAML + 附件），不是平台数据库。
+- 可 diff / 可 Git：一条记录一个 `<uuid>.json`，纯文本可版本控制、可多端合并。
+- 索引可删除：`index.sqlite` 是可 100% 重建的索引，删除不丢数据。
+- 不做同步：软件只读写文件夹，同步交给 Syncthing / WebDAV / Git。
+- 定向导出：问卷 + 岗位调研 → 裁剪策略 → 10 套模板 → Typst→PDF（桌面）/ DartPdf（全平台）/ DOCX（ATS 单列）/ Markdown。
+- 岗位画像：内置 60 类（细分行业 + 职级），给出按边际效益排序的补齐建议。
+
+## 明确不做什么
+
+- 不提供云同步、不建账号、不上传用户数据、不私自创建目录。
+- 不是在线简历生成 SaaS；没有订阅与服务器端存储。
+- Web 版是内存演示（刷新即清），不是生产环境。
+
+## 常见问题
+
+- 是开源软件吗？源码公开，但许可是 PolyForm Noncommercial 1.0.0，非 OSI 认可的开源许可。
+- 能离线用吗？能（Web 演示版除外）。AI 功能可接本地 Ollama 或自带 API Key。
+- 数据会被上传吗？不会。
+- 支持哪些平台？Android、Windows、Linux、Web。
+
+## 关键词
+
+local-first, personal information management, résumé compiler, resume builder, ATS resume, plain-text, JSON, YAML, offline, Flutter, 履痕, 个人资料管理, 简历生成, 定向简历, 本地优先

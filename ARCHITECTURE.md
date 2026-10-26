@@ -299,7 +299,7 @@ App 本地受权限文件（非同步根内），并在 UI 显式提示风险与
 
 ## 10. 许可与合规
 
-- 仓库：`EaveBounty/Lifeline`，许可 **PolyForm Noncommercial 1.0.0**。
+- 仓库：`EaveBounty/lvhen-resume`，许可 **PolyForm Noncommercial 1.0.0**。
 - 署名：代码版权「长沙市果垂素宇工程设计有限公司」；GitHub 用户名/URL 除外。
 - 内嵌第三方资产（Typst 二进制 Apache-2.0、简历模板 MIT/Apache/Unlicense、字体 OFL）逐项登记于 `NOTICE`，
   **禁止**引入 GPL/AGPL 资产入发行包。

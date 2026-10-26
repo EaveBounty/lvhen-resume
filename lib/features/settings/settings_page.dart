@@ -21,7 +21,7 @@ import '../update/update_dialog.dart';
 
 /// 版本号：与 pubspec.yaml 的 version 保持一致（未引入 package_info_plus）。
 const String _appVersion = '0.8.0+14';
-const String _githubUrl = 'https://github.com/EaveBounty/Lifeline';
+const String _githubUrl = 'https://github.com/EaveBounty/lvhen-resume';
 const String _license = 'PolyForm Noncommercial 1.0.0';
 
 class SettingsPage extends ConsumerStatefulWidget {

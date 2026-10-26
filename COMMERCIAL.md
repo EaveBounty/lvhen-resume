@@ -1,6 +1,6 @@
 # 商业授权说明（Commercial Licensing）
 
-> Lifeline · 履痕（仓库 `EaveBounty/Lifeline`）以 **PolyForm Noncommercial License 1.0.0** 发布。
+> Lifeline · 履痕（仓库 `EaveBounty/lvhen-resume`）以 **PolyForm Noncommercial License 1.0.0** 发布。
 > 该许可**仅允许非商业用途**。任何商业用途**必须**向版权方另行取得**书面商业授权**。
 > 本文件为**便利性说明**，不构成法律意见；最终以 `LICENSE` 全文与双方签署的正式协议为准。
 

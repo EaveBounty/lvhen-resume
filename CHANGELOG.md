@@ -5,6 +5,15 @@
 
 ## [Unreleased]
 
+### 可发现性（SEO / AI 检索）
+- 首页标题改为 `履痕（Lvhen）— 本地优先的个人资料库与简历编译器`，tagline 增补英文品类词与落地页/机器摘要入口（H1 与首段参与网页主题判定）。
+- 新增落地页 `docs/index.html`（可控 `<title>`、`meta description`、JSON-LD `SoftwareApplication` + `FAQPage`(10 问) + `HowTo`、五方案对比表、用户原话引句），配套 `docs/llms.txt`。
+- 新增 `README.zh-CN.md`：中文独立主诉求（不混入英文主 README 首屏），按需求意图组织 H2 与 FAQ。
+- 新增 `.seo/ledger.yaml`：唯一词表、期望元数据、20 个 topics、8 类需求意图（28 条 query，标注 ac/title/authored 来源）、反 churn 护栏。
+- **需求侧 T0 基线**：DeepSeek 官方 Search 对 28 条需求句命中 **0/28**，DCR=0；品牌词 `履痕` 也落到词典站 → 证实"检索层原样转发查询、不做语义改写"，内容必须字面含用户原话。静态 `coverage`：8/8 意图已有表层覆盖 ≥40%。
+- 命名决策：`Lifeline` 与 `CamDavidsonPilon/lifelines`（2618★）撞名（`in:name` 3838 条），决定改为 `lvhen-resume`（`in:name` 撞名 0）。
+- 注：改名/元数据/Pages 属线上写操作，尚未执行；改名时须同步 5 处仓库引用（update_service / settings_page / README / ARCHITECTURE / COMMERCIAL）与落地页 canonical。
+
 ### 计划
 - U0 脚手架；U1 数据层；U2 首启与设置；U3 信息表与附件；U4 首页完整简历；
   U5 编译管线与渲染器；U6 AI 录入/编译；U7 智能导出；U8 同步文档；U9 测试与 CI。

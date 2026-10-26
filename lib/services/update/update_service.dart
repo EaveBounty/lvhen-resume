@@ -1,6 +1,6 @@
 /// 自动更新：查询 GitHub Releases 最新版本并与本机版本比较。
 ///
-/// 更新源：`https://github.com/EaveBounty/Lifeline` 的 Releases（公开）。
+/// 更新源：`https://github.com/EaveBounty/lvhen-resume` 的 Releases（公开）。
 /// 检查失败一律静默（返回 [Err]，不打扰用户）。
 library;
 
@@ -54,7 +54,7 @@ class UpdateService {
   final Dio _dio;
 
   static const String _repoApi =
-      'https://api.github.com/repos/EaveBounty/Lifeline/releases/latest';
+      'https://api.github.com/repos/EaveBounty/lvhen-resume/releases/latest';
 
   Future<Result<UpdateInfo>> check() async {
     try {
@@ -82,7 +82,7 @@ class UpdateService {
         hasUpdate: compareVersions(latest, current) > 0,
         currentVersion: current,
         latestVersion: latest,
-        releaseUrl: '${data['html_url'] ?? 'https://github.com/EaveBounty/Lifeline/releases'}',
+        releaseUrl: '${data['html_url'] ?? 'https://github.com/EaveBounty/lvhen-resume/releases'}',
         assetUrl: _pickAsset(assets),
         notes: '${data['body'] ?? ''}',
       ));
