@@ -1,178 +1,259 @@
-# .seo/ledger.yaml — 履痕（Lvhen）检索词表与元数据真相源
-#
-# 用法（详见 github-ops 技能 references/discoverability.md）：
-#   python repo_seo.py brief  --ledger .seo/ledger.yaml     # 给模型看的紧凑反馈单
-#   python repo_seo.py plan   --ledger .seo/ledger.yaml     # 冷却/配额检查后出单批次提案
-#   python repo_seo.py decide --ledger .seo/ledger.yaml --verdict accept --note "..."
-#
-# 铁律：本文件的词是**一次性精挑**的结果，脚本不会自创词；
-#       改词等于一次"重新定位"，须同时改写 guardrails 的冷却计时。
-
 project: 履痕
 display_name: 履痕 (Lvhen)
 repo: EaveBounty/lvhen-resume
 previous_names:
-  - EaveBounty/lvhen-resume        # 2026-10 前；改名后 GitHub 301，旧链接仍可用
-primary_token: lvhen           # 唯一实体锚点：必须出现在 name / description / H1 / 落地页 title
-
-# ── 关键词分层（依据 2026-10-26 实测撞名与 topic 密度，勿随意增删）─────────────
+- EaveBounty/lvhen-resume
+primary_token: lvhen
 keywords:
   primary:
-    - lvhen                     # in:name 精确撞名 0-9（全为 lvheng 变体）
-    - 履痕                       # in:name 撞名 0；中文唯一锚点
-  english:                      # 品类词：吃"是什么"类查询
-    - local-first
-    - career record
-    - résumé compiler
-    - resume builder
-    - ats
-    - plain-text
-    - personal data
-  chinese:                      # 中文长尾：吃中文口语查询
-    - 个人资料管理
-    - 简历生成
-    - 定向简历
-    - 简历编译
-    - 本地优先
+  - lvhen
+  - 履痕
+  english:
+  - local-first
+  - career record
+  - résumé compiler
+  - resume builder
+  - ats
+  - plain-text
+  - personal data
+  chinese:
+  - 个人资料管理
+  - 简历生成
+  - 定向简历
+  - 简历编译
+  - 本地优先
   tech:
-    - flutter
-    - dart
-    - sqlite
-
-# ── 反 churn 护栏（脚本强制执行，改这里之前先想清楚）─────────────────────────
+  - flutter
+  - dart
+  - sqlite
 guardrails:
-  max_topics: 20                # GitHub 硬上限，官方规定
-  max_changes_per_cycle: 3      # 单轮最多改 3 个字段，防"一次改一堆"触发风控/不可归因
-  min_interval_days: 14         # 两轮之间至少 14 天，让索引与检索先吸收
-  max_lifetime_writes: 4        # 终身最多 4 轮元数据改动；用完即冻结定位
+  max_topics: 20
+  max_changes_per_cycle: 3
+  min_interval_days: 14
+  max_lifetime_writes: 4
   max_primary_keywords: 3
-  max_queries: 10               # 品牌探测上限
-  max_intent_queries: 40        # 需求侧探测上限（8 意图 × 5）；撒网=无法归因
-
-# ── 期望元数据（plan 与 current 做 diff，生成单批次 gh 命令）──────────────────
+  max_queries: 10
+  max_intent_queries: 40
 desired:
   name: lvhen-resume
-  description: "Resume builder · local-first career record — 履痕 (Lvhen): 个人资料管理，数据是自己文件夹里的纯文本 JSON/YAML，改一条即自动重编译整份简历，按岗位裁剪后导出 PDF / DOCX(ATS) / Markdown。不上传、不注册、可离线。Flutter, Android/Windows/Linux/Web."
-  homepage: "https://eavebounty.github.io/lvhen-resume/"   # GitHub Pages（/docs）；改名后 Pages URL 不随 301 跳转，需同步改这里与 5 处仓库引用
+  description: 'Resume builder · local-first career record — 履痕 (Lvhen): 个人资料管理，数据是自己文件夹里的纯文本 JSON/YAML，改一条即自动重编译整份简历，按岗位裁剪后导出
+    PDF / DOCX(ATS) / Markdown。不上传、不注册、可离线。Flutter, Android/Windows/Linux/Web.'
+  homepage: https://eavebounty.github.io/lvhen-resume/
   topics:
-    - lvhen                              # 品牌（防仿冒/聚合）
-    - personal-information-management    # 41 库 · 长尾优
-    - ats-resume                          # 272 库 · 长尾可
-    - plain-text                          # 306 库 · 长尾可
-    - resume-builder                      # 2609 · 中竞争（品类必占）
-    - cv
-    - career
-    - resume
-    - json
-    - yaml
-    - markdown
-    - flutter
-    - dart
-    - sqlite
-    - android
-    - windows
-    - linux
-    - web
-    - chinese
-    - zh-cn
-
-# ── 需求侧意图集（真正的靶子：用户不会搜你的项目名）─────────────────────────
-# source 三档：ac=下拉框/联想原文（第三方语料，计入主指标）｜title=帖子标题原文（计入）
-#              authored=自拟（不计入主指标，只做参考）
-# 判定：非品牌需求句在 top-K 内出现自家 URL，且结果意图与产品同类 → 才算召回。
+  - lvhen
+  - personal-information-management
+  - ats-resume
+  - plain-text
+  - resume-builder
+  - cv
+  - career
+  - resume
+  - json
+  - yaml
+  - markdown
+  - flutter
+  - dart
+  - sqlite
+  - android
+  - windows
+  - linux
+  - web
+  - chinese
+  - zh-cn
 intents:
-  - id: C1
-    label: 约束·本地优先/不上传
-    weight: 0.25
-    target_surface: [github.description, landing.faq, docs.data-format]
-    queries:
-      - {q: "简历不想上传到网站 用自己的电脑管理", source: authored}
-      - {q: "resume builder works offline", source: title}
-      - {q: "resume builder no signup no account", source: authored}
-      - {q: "self hosted cv", source: ac}
-  - id: P1
-    label: 痛点·版本多/每次重排
-    weight: 0.20
-    target_surface: [readme.h2.why, landing.faq, docs.versioning]
-    queries:
-      - {q: "每次投简历都要重新写一遍经历", source: authored}
-      - {q: "简历版本太多怎么办", source: ac}
-      - {q: "sick of tailoring my resume to every job", source: title}
-      - {q: "editing my resume always breaks the layout", source: authored}
-  - id: P2
-    label: 品类·简历工具/编译器
-    weight: 0.15
-    target_surface: [github.description, github.topics, landing.h1]
-    queries:
-      - {q: "简历制作工具", source: ac}
-      - {q: "简历管理系统", source: ac}
-      - {q: "markdown resume builder", source: ac}
-      - {q: "ats friendly resume checker", source: ac}
-  - id: H1
-    label: how-to·按岗位裁剪与导出
-    weight: 0.15
-    target_surface: [readme.h2.how, landing.faq, docs.tailor-to-jd]
-    queries:
-      - {q: "简历怎么针对岗位改", source: ac}
-      - {q: "简历怎么导出docx", source: authored}
-      - {q: "how to tailor resume to job description", source: ac}
-      - {q: "how to keep resume in git", source: authored}
-  - id: A1
-    label: 对比·工作流选型
-    weight: 0.08
-    target_surface: [readme.h2.compared, landing.compare_table]
-    queries:
-      - {q: "latex 简历 值得吗", source: authored}
-      - {q: "latex vs word resume ats", source: authored}
-      - {q: "markdown vs latex resume", source: authored}
-  - id: E1
-    label: 报错·导出与格式崩坏
-    weight: 0.07
-    target_surface: [readme.h2.troubleshooting, landing.faq]
-    queries:
-      - {q: "简历导出pdf 排版乱", source: ac}
-      - {q: "word简历格式错乱", source: ac}
-      - {q: "resume pdf text not selectable ats", source: authored}
-  - id: L1
-    label: 地区·中文求职市场
-    weight: 0.06
-    target_surface: [readme_zh.h2, landing.faq]
-    queries:
-      - {q: "校招 简历 模板", source: authored}
-      - {q: "中文简历和英文简历同时投", source: authored}
-      - {q: "one page resume for new grad", source: authored}
-  - id: R1
-    label: 学术·论文与研究者
-    weight: 0.04
-    target_surface: [readme.h2.for_researchers, landing.faq, docs.publications]
-    queries:
-      - {q: "学术简历 cv 和 resume 区别", source: authored}
-      - {q: "论文列表 简历怎么放", source: authored}
-      - {q: "resume builder for academics", source: table}
-
-# ── 当前线上状态（decide 时由脚本回写；手工改无效）────────────────────────────
+- id: C1
+  label: 约束·本地优先/不上传
+  weight: 0.25
+  target_surface:
+  - github.description
+  - landing.faq
+  - docs.data-format
+  queries:
+  - q: 简历不想上传到网站 用自己的电脑管理
+    source: authored
+  - q: resume builder works offline
+    source: title
+  - q: resume builder no signup no account
+    source: authored
+  - q: self hosted cv
+    source: ac
+- id: P1
+  label: 痛点·版本多/每次重排
+  weight: 0.2
+  target_surface:
+  - readme.h2.why
+  - landing.faq
+  - docs.versioning
+  queries:
+  - q: 每次投简历都要重新写一遍经历
+    source: authored
+  - q: 简历版本太多怎么办
+    source: ac
+  - q: sick of tailoring my resume to every job
+    source: title
+  - q: editing my resume always breaks the layout
+    source: authored
+- id: P2
+  label: 品类·简历工具/编译器
+  weight: 0.15
+  target_surface:
+  - github.description
+  - github.topics
+  - landing.h1
+  queries:
+  - q: 简历制作工具
+    source: ac
+  - q: 简历管理系统
+    source: ac
+  - q: markdown resume builder
+    source: ac
+  - q: ats friendly resume checker
+    source: ac
+- id: H1
+  label: how-to·按岗位裁剪与导出
+  weight: 0.15
+  target_surface:
+  - readme.h2.how
+  - landing.faq
+  - docs.tailor-to-jd
+  queries:
+  - q: 简历怎么针对岗位改
+    source: ac
+  - q: 简历怎么导出docx
+    source: authored
+  - q: how to tailor resume to job description
+    source: ac
+  - q: how to keep resume in git
+    source: authored
+- id: A1
+  label: 对比·工作流选型
+  weight: 0.08
+  target_surface:
+  - readme.h2.compared
+  - landing.compare_table
+  queries:
+  - q: latex 简历 值得吗
+    source: authored
+  - q: latex vs word resume ats
+    source: authored
+  - q: markdown vs latex resume
+    source: authored
+- id: E1
+  label: 报错·导出与格式崩坏
+  weight: 0.07
+  target_surface:
+  - readme.h2.troubleshooting
+  - landing.faq
+  queries:
+  - q: 简历导出pdf 排版乱
+    source: ac
+  - q: word简历格式错乱
+    source: ac
+  - q: resume pdf text not selectable ats
+    source: authored
+- id: L1
+  label: 地区·中文求职市场
+  weight: 0.06
+  target_surface:
+  - readme_zh.h2
+  - landing.faq
+  queries:
+  - q: 校招 简历 模板
+    source: authored
+  - q: 中文简历和英文简历同时投
+    source: authored
+  - q: one page resume for new grad
+    source: authored
+- id: R1
+  label: 学术·论文与研究者
+  weight: 0.04
+  target_surface:
+  - readme.h2.for_researchers
+  - landing.faq
+  - docs.publications
+  queries:
+  - q: 学术简历 cv 和 resume 区别
+    source: authored
+  - q: 论文列表 简历怎么放
+    source: authored
+  - q: resume builder for academics
+    source: table
 current:
-  name: Lifeline
-  description: "Lifeline · 履痕 — 个人资料管理软件（数据/配置外部挂载，JSON 真相源 + SQLite 可重建索引，AI 自动录入/编译/定向导出简历）"
-  homepage: null
-  topics: []
-
-# ── 探测查询集（固定，改版前锁定；GitHub 站内 best-match 排名）───────────────
+  name: lvhen-resume
+  description: 'Resume builder · local-first career record — 履痕 (Lvhen): 个人资料管理，数据是自己文件夹里的纯文本 JSON/YAML，改一条即自动重编译整份简历，按岗位裁剪后导出
+    PDF / DOCX(ATS) / Markdown。不上传、不注册、可离线。Flutter, Android/Windows/Linux/Web.'
+  topics:
+  - android
+  - ats-resume
+  - career
+  - chinese
+  - cv
+  - dart
+  - flutter
+  - json
+  - linux
+  - lvhen
+  - markdown
+  - personal-information-management
+  - plain-text
+  - resume
+  - resume-builder
+  - sqlite
+  - web
+  - windows
+  - yaml
+  - zh-cn
+  homepage: https://eavebounty.github.io/lvhen-resume/
 queries:
-  - {q: "lvhen", expect_rank: 1}
-  - {q: "lvhen 履痕", expect_rank: 1}
-  - {q: "履痕", expect_rank: 3}
-  - {q: "履痕 简历", expect_rank: 5}
-  - {q: "个人资料管理 简历", expect_rank: 10}
-  - {q: "personal-information-management resume", expect_rank: 10}
-  - {q: "ats resume plain-text local-first", expect_rank: 10}
-  - {q: "local-first resume compiler", expect_rank: 10}
-
-# 外部引擎命中判据：URL 含以下任一即算命中
+- q: lvhen
+  expect_rank: 1
+- q: lvhen 履痕
+  expect_rank: 1
+- q: 履痕
+  expect_rank: 3
+- q: 履痕 简历
+  expect_rank: 5
+- q: 个人资料管理 简历
+  expect_rank: 10
+- q: personal-information-management resume
+  expect_rank: 10
+- q: ats resume plain-text local-first
+  expect_rank: 10
+- q: local-first resume compiler
+  expect_rank: 10
 needles:
-  - github.com/EaveBounty/lvhen-resume
-  - github.com/EaveBounty/lvhen-resume
-  - eavebounty.github.io/lvhen-resume
-
-# ── 决策历史（decide 追加，勿手改）──────────────────────────────────────────
-history: []
+- github.com/EaveBounty/lvhen-resume
+- github.com/EaveBounty/lvhen-resume
+- eavebounty.github.io/lvhen-resume
+history:
+- at: '2026-10-26T05:10:01+00:00'
+  verdict: accept
+  note: 改名 lvhen-resume + desc/homepage + 20 topics + Pages 上线；audit 33->91
+  plan_sha: null
+  score: 91
+  current:
+    name: lvhen-resume
+    description: 'Resume builder · local-first career record — 履痕 (Lvhen): 个人资料管理，数据是自己文件夹里的纯文本 JSON/YAML，改一条即自动重编译整份简历，按岗位裁剪后导出
+      PDF / DOCX(ATS) / Markdown。不上传、不注册、可离线。Flutter, Android/Windows/Linux/Web.'
+    topics:
+    - android
+    - ats-resume
+    - career
+    - chinese
+    - cv
+    - dart
+    - flutter
+    - json
+    - linux
+    - lvhen
+    - markdown
+    - personal-information-management
+    - plain-text
+    - resume
+    - resume-builder
+    - sqlite
+    - web
+    - windows
+    - yaml
+    - zh-cn
+    homepage: https://eavebounty.github.io/lvhen-resume/
