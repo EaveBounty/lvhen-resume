@@ -152,7 +152,7 @@
 └── index.sqlite                     # 可 100% 重建的索引（可删、勿提交）</code></pre>
 <p>软件只读写这个文件夹：不建云、不碰同步、不私自创建目录。需要多设备时用 Syncthing、WebDAV 或 Git——它们本来就是为这件事设计的。</p>
 
-<h2>每次投不同岗位，怎么针对 JD 改简历？</h2>
+<h2>简历怎么针对岗位改？（按 JD 定向裁剪）</h2>
 <p>不做“再来一版 Word”。流程是：选目标岗位与职级 → 回答裁剪问卷（系统会追问关键取舍）→ 生成裁剪策略（保留 / 压缩 / 删除 + 理由 + ATS 关键词）→ 选模板预览 → 导出。原素材不动，改动只发生在这一次导出里，可随时回到库内重渲染。</p>
 <p>岗位画像内置 60 类（细分行业 + 职级），会对照硬性要求指出缺漏（例如教师缺教资、算法岗缺竞赛/开源），并按<b>边际效益</b>排序告诉你先补哪一项。</p>
 
@@ -212,6 +212,84 @@
 
 <h3>履痕是开源软件吗？</h3>
 <p>源码公开，但许可是 <b>PolyForm Noncommercial License 1.0.0</b>（非 OSI 认可的开源许可）：允许非商业使用与修改，商业用途需另行授权。</p>
+
+
+<h2>简历版本太多怎么办？</h2>
+<p>大多数简历制作工具把内容锁在模板里，所以每投一个岗位就要复制一份文件，版本因此爆炸。履痕把内容和版式分开，才谈得上"一份数据、多份导出"。</p>
+<p>把"版本"从文件变成参数：原素材只有一份（你自己的文件夹），每次投递只生成这一份的裁剪策略与导出件，<code>resumes/&lt;id&gt;/</code> 里保存 spec 与成品。改素材不会影响历史导出，历史导出也可以随时按新素材重渲染。</p>
+
+<h2>简历导出PDF排版乱、文字不能选中怎么办？</h2>
+<p>这两件事通常是同一个原因：把文字渲染成图片，或行高/分页计算与实际字体不一致。履痕的 PDF 保留文本层（可选中、可被 ATS 解析），并且导出前有固定的页数闭环——先渲染计量页数，再按取舍权重确定性裁剪，然后重渲染（≤8 轮），所以不会出现"裁完又溢出"的抖动。</p>
+
+<h2>LaTeX 简历值得吗？Word / Markdown / LaTeX 怎么选</h2>
+<p>LaTeX 简历值得吗？看你要"控制"还是"速度"：LaTeX 版式最稳、适合学术 CV，但环境与中文支持成本高；Word 改一处容易崩版式，且是二进制不可 diff；Markdown 最轻但排版能力有限。<b>latex vs word resume ats</b> 的关键其实是导出结构：ATS 只读文本与段落顺序，单列 DOCX 通常比双栏 PDF 更稳。履痕的做法是把"版式"交给模板（含 Typst/DartPdf 的 PDF 与单列 DOCX），你只维护数据。</p>
+
+<h2>学术简历 CV 和 resume 区别，论文列表 简历怎么放</h2>
+<p>CV 是完整学术履历（论文、项目、教学、服务全列，长度不设限），resume 是针对岗位的一到两页摘要。履痕让两者共用同一份数据：论文与项目都是记录，导出时选 <code>academic-cv</code> 模板保留完整论文列表，选 ATS 模板则按岗位裁剪。<b>论文列表</b>建议按时间倒序、统一格式（作者·标题· venue·年份·链接），在导出时作为独立小节渲染。</p>
+
+<h2>中文简历和英文简历同时投，可以吗？</h2>
+<p>能，而且共用同一份素材。区别在语言与格式惯例：中文简历常放照片、一页、按时间倒序；英文简历通常不放照片、强调量化结果。履痕允许同一记录带中英文字段，分别导出两版，避免维护两份内容逐渐不一致。</p>
+
+<h2>校招简历模板怎么选？（应届生）</h2>
+<p>如果你在找 <b>word简历格式错乱</b> 的替代方案：Word 的版式是二进制且依赖本机字体，换机器/换字号就会错位；改用数据 + 模板渲染可以从根上避免这件事。</p>
+<p>校招看的是"可快速核验的硬信息"：学校专业、绩点/排名、实习、项目、竞赛。选单列、无花哨配色的模板（ATS 与 HR 都更容易读），一页为限，项目写清"你做了什么 + 结果数字"。履痕内置 <code>fresh-graduate</code> 与 ATS 单列模板，并按目标岗位给出缺漏项（例如教师岗缺教资、算法岗缺竞赛/开源）。</p>
+
+<h2>常见英文问法（FAQ in English）</h2>
+<h3>Sick of tailoring my resume to every job — how do I make it less painful?</h3>
+<p>Keep one source of truth and generate per-job versions from it. In Lvhen your records live once in your folder; tailoring produces a plan (keep / compress / delete with reasons) and a rendered export, so you never re-type your history.</p>
+
+<h3>Editing my resume always breaks the layout — how do I avoid that?</h3>
+<p>Separate content from layout. Lvhen renders from a template (Typst/DartPdf PDF, single-column DOCX, Markdown) and re-measures page count after every change, so edits change text, not geometry.</p>
+
+<h3>How to tailor resume to job description</h3>
+<p>Paste the JD into the export questionnaire: Lvhen compares it against 60 role profiles, lists missing hard requirements, and orders the fixes by marginal benefit before generating the tailored version.</p>
+
+<h3>LaTeX vs Word resume for ATS — which parses better?</h3>
+<p>ATS reads text and paragraph order, not visual polish. A single-column DOCX or a PDF with a real text layer parses reliably; multi-column layouts and text-rendered-as-image break. Lvhen exports single-column DOCX and keeps a selectable text layer in PDF.</p>
+
+<h3>Markdown vs LaTeX resume — which should I use?</h3>
+<p>Markdown if you want version control and fast edits; LaTeX if you need precise academic typesetting. Lvhen lets you keep data as plain JSON/YAML and export Markdown, DOCX or PDF from the same source, so the choice is per export, not per project.</p>
+
+<h3>Resume PDF text not selectable ATS — why?</h3>
+<p>The PDF was likely produced by rasterizing text into an image. Lvhen's PDF keeps a selectable text layer and its export loop re-measures page count before re-rendering, avoiding the裁剪-induced overflow that often pushes people to screenshot their resume.</p>
+
+<h3>One page resume for new grad — how do I fit everything?</h3>
+<p>Rank by relevance, not completeness: keep education, two strongest projects, and quantified results; compress older or unrelated items to one line. Lvhen's page-fitting loop keeps at least two bullets per item and drops lowest-priority entries first.</p>
+
+<h3>How to keep a resume in git?</h3>
+<p>Store one record per file as plain text. Lvhen writes <code>data/records/&lt;category&gt;/&lt;uuid&gt;.json</code> plus <code>profile.json</code>, so every change is diffable and mergeable; the SQLite index is rebuildable and should be gitignored.</p>
+
+
+<h2>更多常见问法（按用户原句整理）</h2>
+<h3>简历不想上传到网站 用自己的电脑管理</h3>
+<p>可以。履痕不建账号、不上传，数据就是你选的文件夹里的 JSON/YAML 与附件；需要多设备时用 Syncthing / WebDAV / Git。</p>
+
+<h3>resume builder works offline</h3>
+<p>Yes. Except the in-memory web demo, Lvhen runs fully offline: records, compilation and PDF/DOCX/Markdown export all happen locally. AI features can point at a local Ollama instance.</p>
+
+<h3>resume builder no signup no account</h3>
+<p>There is no account system at all — no email, no password, no server-side profile. The app reads and writes a folder you choose on first launch.</p>
+
+<h3>self hosted cv</h3>
+<p>Self-hosting here means self-owning the data: the CV is compiled from files on your own disk and can be served or synced by whatever you already run (Git, WebDAV, Syncthing). There is no Lvhen server to host.</p>
+
+<h3>简历管理系统</h3>
+<p>把"管理"落在文件上：一条经历一个 JSON 文件，按分类目录存放，SQLite 只是可重建索引；分类可自定义（增删改、拖拽排序），删除或改名时可迁移记录。</p>
+
+<h3>markdown resume builder</h3>
+<p>数据可以是纯文本，导出可选 Markdown（便于 Git diff）。与纯模板方案的差别是：内容来自结构化记录，Markdown 只是其中一种渲染结果，同一份数据还能导出 ATS 单列 DOCX 与 PDF。</p>
+
+<h3>ats friendly resume checker</h3>
+<p>导出侧做了 ATS 取向：单列 DOCX、无文本框、字段可解析；同时按 60 类岗位画像对照硬性要求，指出缺漏项并按边际效益排序。它不是"打分网站"，检查发生在你自己的数据上。</p>
+
+<h3>简历怎么导出docx</h3>
+<p>在导出向导里选 DOCX：默认单列 ATS 版式，可选 modern 彩色标题；渲染前会先按目标岗位裁剪，再生成文件并归档到 <code>data/resumes/&lt;id&gt;/</code>。</p>
+
+<h3>how to keep resume in git</h3>
+<p>Keep one record per file and gitignore the index. Lvhen writes <code>data/records/&lt;category&gt;/&lt;uuid&gt;.json</code> and <code>profile.json</code>; <code>index.sqlite</code> is rebuildable, so it never belongs in history.</p>
+
+<h3>resume builder for academics</h3>
+<p>Publications, projects and teaching are just records; the <code>academic-cv</code> template keeps the full publication list, while the ATS template trims the same data to one or two pages for industry applications.</p>
 
 <h2>快速开始</h2>
 <ol>
