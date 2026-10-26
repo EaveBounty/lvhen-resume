@@ -10,6 +10,9 @@
 - **Site**: <https://eavebounty.github.io/lvhen-resume/en/> ｜ **中文**: <https://eavebounty.github.io/lvhen-resume/>
 - **License**: PolyForm Noncommercial License 1.0.0 ｜ © 长沙市果垂素宇工程设计有限公司
 
+
+<p align="center"><img src="docs/assets/shots/en-desktop.webp" width="1440" height="900" alt="Lvhen English page at 1440×900" loading="lazy"></p>
+
 ## Screenshots
 
 | Home — compiled resume | Tailored export |

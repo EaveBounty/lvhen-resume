@@ -38,6 +38,9 @@
 - [变更日志](#变更日志)
 
 
+
+<p align="center"><img src="docs/assets/shots/zh-desktop.webp" width="1440" height="900" alt="履痕 Lvhen 中文首页：由数据编译出的完整简历" loading="lazy"></p>
+
 ## 界面与效果
 
 <table>

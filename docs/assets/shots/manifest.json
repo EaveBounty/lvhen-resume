@@ -1,0 +1,41 @@
+{
+  "url": "https://eavebounty.github.io/lvhen-resume/",
+  "viewport": "1440x900",
+  "scale": 2,
+  "theme": "dark",
+  "lang": "zh-CN",
+  "images": [
+    {
+      "name": "zh-desktop",
+      "src": "zh-desktop.webp",
+      "width": 1440,
+      "height": 900,
+      "bytes": 65594,
+      "alt": "履痕 Lvhen 中文首页：由数据编译出的完整简历"
+    },
+    {
+      "name": "zh-mobile",
+      "src": "zh-mobile.webp",
+      "width": 390,
+      "height": 844,
+      "bytes": 46214,
+      "alt": "履痕 Lvhen 移动端 390×844：窄屏下标题与事实卡"
+    },
+    {
+      "name": "en-desktop",
+      "src": "en-desktop.webp",
+      "width": 1440,
+      "height": 900,
+      "bytes": 55450,
+      "alt": "Lvhen English page at 1440×900"
+    },
+    {
+      "name": "zh-dark",
+      "src": "zh-dark.webp",
+      "width": 1440,
+      "height": 900,
+      "bytes": 63694,
+      "alt": "履痕 Lvhen 暗色模式 1440×900"
+    }
+  ]
+}

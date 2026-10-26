@@ -54,6 +54,10 @@
   a:focus-visible, summary:focus-visible, .cta:focus-visible { outline:3px solid var(--accent); outline-offset:3px; border-radius:4px }
   .skip { position:absolute; left:-9999px; top:0; background:var(--card); padding:10px 14px; border:1px solid var(--line); border-radius:8px; z-index:9 }
   .skip:focus { left:12px; top:12px }
+  .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin:16px 0 }
+  .gallery figure { margin:0 }
+  .gallery img { width:100%; height:auto; border:1px solid var(--line); border-radius:10px }
+  .gallery figcaption { color:var(--muted); font-size:13.5px; margin-top:6px }
   .lang { margin-inline-start:auto; font-size:14px; color:var(--muted) }
   @media print { .skip, .cta { display:none } body { background:#fff; color:#000 } }
   @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; scroll-behavior:auto !important } }
@@ -148,6 +152,14 @@
   <div class="card"><b>0 云端</b><span>无账号、无上传、无私有协议；删掉索引库也不丢数据 · <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md#数据挂载与同步理念">出处</a></span></div>
 </div>
 
+
+<h2>界面与效果</h2>
+<div class="gallery">
+<figure><img src="./assets/shots/zh-desktop.webp" alt="履痕 Lvhen 中文首页：由数据编译出的完整简历" width="1440" height="900" decoding="async"><figcaption>中文首页：数据变更即重编译的完整简历</figcaption></figure>
+<figure><img src="./assets/shots/zh-mobile.webp" alt="履痕 Lvhen 移动端 390×844：窄屏下标题与事实卡" width="390" height="844" decoding="async"><figcaption>移动端 390×844：窄屏排版</figcaption></figure>
+<figure><img src="./assets/shots/zh-dark.webp" alt="履痕 Lvhen 暗色模式 1440×900" width="1440" height="900" decoding="async"><figcaption>暗色模式</figcaption></figure>
+<figure><img src="./assets/shots/en-desktop.webp" alt="Lvhen English page at 1440×900" width="1440" height="900" decoding="async"><figcaption>英文页（自动语言切换）</figcaption></figure>
+</div>
 <h2>简历数据存在哪？会不会上传？</h2>
 <p>存在你自己选的文件夹里，不会上传。同步根目录长这样：</p>
 <pre><code>data/

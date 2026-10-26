@@ -50,6 +50,10 @@
   a:focus-visible, summary:focus-visible, .cta:focus-visible { outline:3px solid var(--accent); outline-offset:3px; border-radius:4px }
   .skip { position:absolute; left:-9999px; top:0; background:var(--card); padding:10px 14px; border:1px solid var(--line); border-radius:8px; z-index:9 }
   .skip:focus { left:12px; top:12px }
+  .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin:16px 0 }
+  .gallery figure { margin:0 }
+  .gallery img { width:100%; height:auto; border:1px solid var(--line); border-radius:10px }
+  .gallery figcaption { color:var(--muted); font-size:13.5px; margin-top:6px }
   @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; scroll-behavior:auto !important } }
   @media print { .skip, .cta, .lang { display:none } body { background:#fff; color:#000 } }
 </style>
@@ -121,6 +125,14 @@
   <div class="card"><b>0 cloud</b><span>no account, no upload, no proprietary sync <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md">source</a></span></div>
 </div>
 
+
+<h2>Interface</h2>
+<div class="gallery">
+<figure><img src="../assets/shots/en-desktop.webp" alt="Lvhen English page at 1440×900" width="1440" height="900" decoding="async"><figcaption>English page at 1440×900</figcaption></figure>
+<figure><img src="../assets/shots/zh-desktop.webp" alt="履痕 Lvhen 中文首页：由数据编译出的完整简历" width="1440" height="900" decoding="async"><figcaption>Chinese page (auto language switch)</figcaption></figure>
+<figure><img src="../assets/shots/zh-mobile.webp" alt="履痕 Lvhen 移动端 390×844：窄屏下标题与事实卡" width="390" height="844" decoding="async"><figcaption>Mobile layout at 390×844</figcaption></figure>
+<figure><img src="../assets/shots/zh-dark.webp" alt="履痕 Lvhen 暗色模式 1440×900" width="1440" height="900" decoding="async"><figcaption>Dark mode</figcaption></figure>
+</div>
 <h2>Where does the resume data live?</h2>
 <p>In a folder you choose, as plain text — never on a server.</p>
 <pre><code>data/
