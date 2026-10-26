@@ -6,6 +6,9 @@
 ## [Unreleased]
 
 ### 可发现性（SEO / AI 检索）
+- 展示图用无头浏览器实拍（`npx playwright screenshot`，无需 pip）：中文桌面 1440×900 / 移动 390×844 / 英文页 / 暗色，四张 WebP（45–66KB）+ `docs/assets/shots/manifest.json`；中英页各加 `<figure>` 画廊，README 加 hero，全部带 width/height/alt。
+- Pages 双语：`docs/index.html`（zh）与 `docs/en/index.html`（en），`hreflang`（zh-CN/en/x-default）+ 可见切换 + 按 `navigator.language` 自动跳转（尊重 `?lang=`、跳过爬虫 UA，避免 cloaking）。
+- README 双语：`README.md` 中文默认 ↔ `README.en.md` 英文，首行互链；删除重复的 `README.zh-CN.md`。
 - 首页标题改为 `履痕（Lvhen）— 本地优先的个人资料库与简历编译器`，tagline 增补英文品类词与落地页/机器摘要入口（H1 与首段参与网页主题判定）。
 - 新增落地页 `docs/index.html`（可控 `<title>`、`meta description`、JSON-LD `SoftwareApplication` + `FAQPage`(10 问) + `HowTo`、五方案对比表、用户原话引句），配套 `docs/llms.txt`。
 - 新增 `README.zh-CN.md`：中文独立主诉求（不混入英文主 README 首屏），按需求意图组织 H2 与 FAQ。
