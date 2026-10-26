@@ -1,3 +1,5 @@
+**中文** ｜ [English](README.en.md)
+
 # 履痕（Lvhen）— 本地优先的个人资料库与简历编译器
 
 <p align="center"><img src="docs/assets/icon.png" width="112" alt="履痕 Lvhen 应用图标"></p>
@@ -34,6 +36,20 @@
 - [12. 许可与署名](#12-许可与署名)
 - [13. 路线图](#13-路线图)
 - [变更日志](#变更日志)
+
+
+## 界面与效果
+
+<table>
+<tr>
+<td width="50%"><img src="docs/assets/screenshot-home.png" width="1280" height="900" alt="履痕 Lvhen 首页：由数据实时编译出的完整简历" loading="lazy"><br><sub>首页：数据变更即重编译的完整简历</sub></td>
+<td width="50%"><img src="docs/assets/screenshot-export.png" width="1280" height="1500" alt="履痕 Lvhen 定向导出：按岗位裁剪并预览模板" loading="lazy"><br><sub>定向导出：按岗位裁剪 + 模板预览</sub></td>
+</tr>
+<tr>
+<td><img src="docs/assets/screenshot-eval.png" width="1280" height="1400" alt="履痕 Lvhen 简历评估：岗位适配诊断与客观评分" loading="lazy"><br><sub>评估：缺漏项与边际效益排序</sub></td>
+<td><img src="docs/assets/screenshot-categories.png" width="1280" height="900" alt="履痕 Lvhen 分类管理：自定义分类与拖拽排序" loading="lazy"><br><sub>分类：自定义 + 拖拽排序 + 迁移</sub></td>
+</tr>
+</table>
 
 ---
 

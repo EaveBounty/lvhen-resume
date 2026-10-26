@@ -7,6 +7,9 @@
 <title>履痕 Lvhen — 简历工具 / 本地优先的个人资料库与简历编译器</title>
 <meta name="description" content="简历工具，但数据存在你自己电脑的文件夹里：教育、工作、项目、论文存成纯文本 JSON/YAML，改一条就自动重编译整份简历，按岗位裁剪后导出 PDF / DOCX(ATS) / Markdown。不上传、不注册账号、可离线。">
 <link rel="canonical" href="https://eavebounty.github.io/lvhen-resume/">
+<link rel="alternate" hreflang="zh-CN" href="https://eavebounty.github.io/lvhen-resume/">
+<link rel="alternate" hreflang="en" href="https://eavebounty.github.io/lvhen-resume/en/">
+<link rel="alternate" hreflang="x-default" href="https://eavebounty.github.io/lvhen-resume/">
 <meta name="author" content="长沙市果垂素宇工程设计有限公司 (EaveBounty)">
 
 <meta property="og:type" content="website">
@@ -51,6 +54,7 @@
   a:focus-visible, summary:focus-visible, .cta:focus-visible { outline:3px solid var(--accent); outline-offset:3px; border-radius:4px }
   .skip { position:absolute; left:-9999px; top:0; background:var(--card); padding:10px 14px; border:1px solid var(--line); border-radius:8px; z-index:9 }
   .skip:focus { left:12px; top:12px }
+  .lang { margin-inline-start:auto; font-size:14px; color:var(--muted) }
   @media print { .skip, .cta { display:none } body { background:#fff; color:#000 } }
   @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; scroll-behavior:auto !important } }
 </style>
@@ -120,6 +124,7 @@
 <header>
   <img src="./assets/icon.png" alt="履痕 Lvhen 应用图标" width="64" height="64">
   <h1>履痕 Lvhen — 把散落的经历整理成一份随时更新的简历</h1>
+  <a class="lang" href="./en/" hreflang="en" lang="en">English</a>
 </header>
 <p class="sub">最后更新：2026-10-26 · v0.8.0 · 本地优先的简历工具 / 个人资料库 · Android / Windows / Linux / Web · 数据是自己的文件夹</p>
 
@@ -305,5 +310,15 @@
 
 </article>
 </main>
+<script>
+/* 语言自动切换：仅在浏览器语言与当前页不符时跳转；尊重 ?lang=，跳过爬虫，replace 不留历史。 */
+(function(){try{
+  if(/[?&]lang=/.test(location.search))return;
+  if(/bot|crawl|spider|slurp|googlebot|bingbot|baiduspider/i.test(navigator.userAgent))return;
+  var want=(navigator.languages&&navigator.languages[0])||navigator.language||"";
+  var cur=document.documentElement.lang||""; var curZh=/^zh/i.test(cur); var wantZh=/^zh/i.test(want);
+  if(wantZh===curZh)return; location.replace("en/"+location.search+location.hash);
+}catch(e){}})();
+</script>
 </body>
 </html>

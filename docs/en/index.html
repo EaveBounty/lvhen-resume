@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Lvhen — local-first resume builder and career record</title>
+<meta name="description" content="Local-first resume builder: career records as plain JSON/YAML in your own folder, compiled into a resume, tailored per job, exported to PDF, ATS-ready DOCX or Markdown. No upload, no account, offline.">
+<link rel="canonical" href="https://eavebounty.github.io/lvhen-resume/en/">
+<link rel="alternate" hreflang="zh-CN" href="https://eavebounty.github.io/lvhen-resume/">
+<link rel="alternate" hreflang="en" href="https://eavebounty.github.io/lvhen-resume/en/">
+<link rel="alternate" hreflang="x-default" href="https://eavebounty.github.io/lvhen-resume/">
+<meta name="author" content="长沙市果垂素宇工程设计有限公司 (EaveBounty)">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lvhen — local-first resume builder and career record">
+<meta property="og:description" content="Your resume data stays a folder of plain text on your own disk; Lvhen compiles it into a resume and tailors it per job.">
+<meta property="og:url" content="https://eavebounty.github.io/lvhen-resume/en/">
+<meta property="og:image" content="../assets/icon.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root { --bg:#fbfbfd; --fg:#17181c; --muted:#5b6070; --line:#e3e5ec; --accent:#1f3a93; --card:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0e1015; --fg:#eceef4; --muted:#9aa1b2; --line:#252833; --accent:#8fb0ff; --card:#151821; } }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.7 -apple-system,"Segoe UI",system-ui,sans-serif; }
+  main { max-width:880px; margin:0 auto; padding:56px 20px 96px; }
+  header { display:flex; gap:16px; align-items:center; margin-bottom:8px }
+  header img { width:64px; height:64px; border-radius:14px }
+  h1 { font-size:clamp(23px,3.8vw,33px); line-height:1.3; margin:0 }
+  .lang { margin-inline-start:auto; font-size:14px; color:var(--muted) }
+  .sub { color:var(--muted); margin:6px 0 26px }
+  h2 { font-size:20px; margin:46px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line) }
+  h3 { font-size:16.5px; margin:20px 0 6px }
+  .lede { font-size:17px } .lede strong { color:var(--accent) }
+  blockquote { margin:16px 0; padding:6px 0 6px 16px; border-left:3px solid var(--line); color:var(--muted) }
+  blockquote b { color:var(--fg) }
+  table { width:100%; border-collapse:collapse; margin:14px 0; font-size:14.5px }
+  th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top }
+  th { color:var(--muted); font-weight:600; white-space:nowrap }
+  code, pre { background:rgba(127,127,127,.13); border-radius:6px; font-size:.92em }
+  code { padding:1px 5px } pre { padding:14px 16px; overflow:auto }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:14px; margin:18px 0 }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px }
+  .card b { display:block; font-size:22px } .card span { color:var(--muted); font-size:13.5px }
+  a { color:var(--accent) }
+  footer { margin-top:56px; color:var(--muted); font-size:13.5px; border-top:1px solid var(--line); padding-top:18px }
+  .cta { display:inline-block; margin:8px 10px 8px 0; padding:10px 18px; border-radius:999px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600 }
+  .cta.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent) }
+  a:focus-visible, summary:focus-visible, .cta:focus-visible { outline:3px solid var(--accent); outline-offset:3px; border-radius:4px }
+  .skip { position:absolute; left:-9999px; top:0; background:var(--card); padding:10px 14px; border:1px solid var(--line); border-radius:8px; z-index:9 }
+  .skip:focus { left:12px; top:12px }
+  @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; scroll-behavior:auto !important } }
+  @media print { .skip, .cta, .lang { display:none } body { background:#fff; color:#000 } }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lvhen (履痕)",
+  "alternateName": ["Lvhen", "履痕"],
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Resume builder / Personal information manager",
+  "operatingSystem": "Android, Windows, Linux, Web",
+  "description": "Local-first resume builder and career record: education, work, projects and papers are stored as plain JSON/YAML in a folder you own; Lvhen compiles them into a resume, tailors it per job and exports PDF, ATS-ready DOCX or Markdown. No upload, no account, works offline.",
+  "url": "https://eavebounty.github.io/lvhen-resume/en/",
+  "codeRepository": "https://github.com/EaveBounty/lvhen-resume",
+  "downloadUrl": "https://github.com/EaveBounty/lvhen-resume/releases",
+  "license": "https://polyformproject.org/licenses/noncommercial/1.0.0/",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" },
+  "programmingLanguage": "Dart",
+  "author": { "@type": "Organization", "name": "长沙市果垂素宇工程设计有限公司", "alternateName": "EaveBounty" },
+  "inLanguage": ["en", "zh-CN"],
+  "softwareVersion": "0.8.0",
+  "dateModified": "2026-10-26",
+  "keywords": "resume builder, local-first, ATS resume, career record, plain text, JSON resume, offline, Flutter"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Lvhen",
+  "alternateName": ["履痕"],
+  "url": "https://eavebounty.github.io/lvhen-resume/en/",
+  "inLanguage": "en",
+  "publisher": { "@type": "Organization", "name": "长沙市果垂素宇工程设计有限公司", "alternateName": "EaveBounty" }
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<article>
+
+<header>
+  <img src="../assets/icon.png" alt="Lvhen app icon" width="64" height="64">
+  <h1>Lvhen — local-first resume builder and career record</h1>
+  <a class="lang" href="../" hreflang="zh-CN" lang="zh-CN">中文</a>
+</header>
+<p class="sub">Last updated 2026-10-26 · v0.8.0 · Android / Windows / Linux / Web · your data stays a folder</p>
+
+<p class="lede"><strong>In short</strong>: Lvhen is a resume builder that keeps your career data as plain text. Each experience is one JSON record in a folder you pick; the app compiles those records into a complete resume, tailors it to a job description, and exports PDF, single-column DOCX for ATS, or Markdown. No upload, no account, works offline.</p>
+
+<blockquote>
+  <p><b>“I'm sick of re-typing my history for every application.”</b><br>→ Record once; every new entry flows into the compiled resume automatically.</p>
+  <p><b>“Editing my resume always breaks the layout.”</b><br>→ Layout comes from a template; you edit data, not geometry.</p>
+</blockquote>
+
+<p>
+  <a class="cta" href="https://github.com/EaveBounty/lvhen-resume/releases">Download</a>
+  <a class="cta ghost" href="https://github.com/EaveBounty/lvhen-resume">GitHub repository</a>
+</p>
+
+<div class="grid">
+  <div class="card"><b>10 templates</b><span>ATS single-column, academic CV, teaching, creative, business … <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md">source</a></span></div>
+  <div class="card"><b>60 role profiles</b><span>industry and seniority aware, with marginal-benefit fixes <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md">source</a></span></div>
+  <div class="card"><b>4 platforms</b><span>Android, Windows, Linux and Web share one data folder <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md">source</a></span></div>
+  <div class="card"><b>0 cloud</b><span>no account, no upload, no proprietary sync <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md">source</a></span></div>
+</div>
+
+<h2>Where does the resume data live?</h2>
+<p>In a folder you choose, as plain text — never on a server.</p>
+<pre><code>data/
+├── profile.json                     # identity, contact, headline, summary
+├── records/&lt;category&gt;/&lt;uuid&gt;.json   # one experience per file
+├── resumes/&lt;id&gt;/                   # per-application spec and export
+└── index.sqlite                     # rebuildable index (gitignore it)</code></pre>
+<p>The app only reads and writes that folder: no cloud, no sync engine, no hidden directories. For multiple devices, use Syncthing, WebDAV or Git — tools already built for it.</p>
+
+<h2>How to tailor a resume to a job description</h2>
+<p>Pick a target role and seniority, answer the tailoring questionnaire, then let Lvhen produce a plan (keep / compress / delete with reasons and ATS keywords) before rendering. Your source records stay untouched; the tailored version lives in its own export and can be re-rendered later.</p>
+<p>The 60 built-in role profiles list missing hard requirements (e.g. teaching credential, competitions for algorithm roles) and order the fixes by marginal benefit.</p>
+
+<h2>Export formats and ATS</h2>
+<table>
+  <thead><tr><th>Format</th><th>Use</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><th>DOCX</th><td>ATS / HR portals</td><td>single column, no text boxes, parseable fields</td></tr>
+    <tr><th>PDF</th><td>Applications, print</td><td>Typst on desktop, DartPdf fallback; keeps a selectable text layer</td></tr>
+    <tr><th>Markdown</th><td>Versioning</td><td>diffable in Git</td></tr>
+  </tbody>
+</table>
+<p>Page count is a hard constraint: the exporter measures page count first, then trims by priority weights and re-renders (up to 8 rounds), so a one-page export does not silently collapse to two bullets. <a href="https://github.com/EaveBounty/lvhen-resume/blob/main/README.md">Implementation notes</a>.</p>
+
+<h2>Compared to other options</h2>
+<table>
+  <thead><tr><th>Dimension</th><th>Lvhen</th><th>Online resume SaaS</th><th>Word template</th><th>Markdown / LaTeX</th></tr></thead>
+  <tbody>
+    <tr><th>Data ownership</th><td><b>your folder (plain text)</b></td><td>server account</td><td>your file</td><td>your file</td></tr>
+    <tr><th>Diff / Git friendly</th><td><b>yes, one file per record</b></td><td>no</td><td>no, binary</td><td>yes</td></tr>
+    <tr><th>Recompile on edit</th><td><b>yes</b></td><td>manual</td><td>no</td><td>custom scripts</td></tr>
+    <tr><th>Per-JD tailoring</th><td><b>yes, questionnaire + plan</b></td><td>partial</td><td>manual</td><td>manual</td></tr>
+    <tr><th>Offline</th><td><b>yes</b></td><td>no</td><td>yes</td><td>yes</td></tr>
+  </tbody>
+</table>
+
+<h2>FAQ</h2>
+<h3>Is there a resume builder that works offline without an account?</h3>
+<p>Yes. Apart from the in-memory web demo, Lvhen runs fully offline: records, compilation and exports happen locally; AI features can target a local Ollama instance or your own API key.</p>
+
+<h3>Can I keep my resume data in my own folder?</h3>
+<p>That is the only storage mode. Records are JSON/YAML plus attachments in a folder you pick; the SQLite index is rebuildable and can be deleted without losing data.</p>
+
+<h3>Sick of tailoring my resume to every job — how do I make it less painful?</h3>
+<p>Keep one source of truth and generate per-job versions from it. Lvhen produces a tailoring plan and a rendered export, so you never re-type your history.</p>
+
+<h3>Editing my resume always breaks the layout — how do I avoid that?</h3>
+<p>Separate content from layout. Lvhen renders from a template and re-measures page count after changes, so edits change text rather than geometry.</p>
+
+<h3>LaTeX vs Word resume for ATS — which parses better?</h3>
+<p>ATS reads text and paragraph order, not visual polish. Single-column DOCX or a PDF with a real text layer parses reliably; multi-column layouts and text-rendered-as-image break. Lvhen exports single-column DOCX and keeps a selectable text layer.</p>
+
+<h3>Markdown vs LaTeX resume — which should I use?</h3>
+<p>Markdown for version control and fast edits, LaTeX for precise academic typesetting. Lvhen keeps data as plain JSON/YAML and renders Markdown, DOCX or PDF from the same source.</p>
+
+<h3>One page resume for new grad — how do I fit everything?</h3>
+<p>Rank by relevance: education, two strongest projects, quantified results; compress the rest to one line. Lvhen's fitting loop keeps at least two bullets per item and drops lowest-priority entries first.</p>
+
+<h3>How to keep a resume in git?</h3>
+<p>Store one record per file as plain text. Lvhen writes <code>data/records/&lt;category&gt;/&lt;uuid&gt;.json</code> and <code>profile.json</code>; gitignore <code>index.sqlite</code>.</p>
+
+<h3>Is Lvhen open source?</h3>
+<p>Source-available, not OSI open source: PolyForm Noncommercial License 1.0.0. Non-commercial use and modification are allowed; commercial use needs a separate license.</p>
+
+<h2>Quick start</h2>
+<ol>
+  <li>Download the build for your platform from <a href="https://github.com/EaveBounty/lvhen-resume/releases">Releases</a> (Windows <code>.zip</code>, Linux <code>.tar.gz</code>, Android <code>.apk</code>).</li>
+  <li>On first launch, choose an empty folder as the sync root — the app never creates one for you.</li>
+  <li>Add one experience, then pick a target role and export a tailored PDF, DOCX or Markdown.</li>
+</ol>
+
+</article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Lvhen · repository <a href="https://github.com/EaveBounty/lvhen-resume">EaveBounty/lvhen-resume</a> · PolyForm Noncommercial 1.0.0 · © 长沙市果垂素宇工程设计有限公司</p>
+    <p>Last updated 2026-10-26 · <a href="../">中文</a></p>
+  </div>
+</footer>
+
+<script>
+/* Auto language switch: only when the browser language differs; honour ?lang=; skip crawlers. */
+(function(){try{
+  if(/[?&]lang=/.test(location.search))return;
+  if(/bot|crawl|spider|slurp|googlebot|bingbot|baiduspider/i.test(navigator.userAgent))return;
+  var want=(navigator.languages&&navigator.languages[0])||navigator.language||"";
+  if(/^zh/i.test(want)) location.replace("../"+location.search+location.hash);
+}catch(e){}})();
+</script>
+</body>
+</html>
